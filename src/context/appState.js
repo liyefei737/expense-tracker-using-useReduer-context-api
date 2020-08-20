@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react'
 import AppReducer from "../AppReducer";
+import ACTION_STRS from "../ACTION_STRS";
 
 //TODO load state from back ends
 const initialState = {
@@ -12,13 +13,20 @@ const initialState = {
 };
 
 
-
-export const GLobalContext = createContext(initialState);
+export const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
-    return <GLobalContext.Provider value={{ transactions: state.transactions }}>
+    //actions
+    const ACTIONS = {
+        deleteTrxn(id) {
+            dispatch({ type: ACTION_STRS.DELETE_TRANSACTION, id });
+        }
+
+    };
+
+    return <GlobalContext.Provider value={{ transactions: state.transactions, ACTIONS }}>
         {children}
-    </GLobalContext.Provider>
+    </GlobalContext.Provider>
 }
