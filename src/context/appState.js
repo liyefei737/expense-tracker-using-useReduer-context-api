@@ -4,6 +4,8 @@ import ACTION_STRS from "../ACTION_STRS";
 
 //TODO load state from back ends
 const initialState = {
+    income: 0,
+    expense: 0,
     transactions: [
         { id: 1, text: 'Flower', amount: -20 },
         { id: 2, text: 'Salary', amount: 300 },
@@ -22,6 +24,9 @@ export const GlobalProvider = ({ children }) => {
     const ACTIONS = {
         deleteTrxn(id) {
             dispatch({ type: ACTION_STRS.DELETE_TRANSACTION, id });
+        },
+        addTrxn(transaction) {
+            dispatch({ type: ACTION_STRS.ADD_TRANSACTION, transaction });
         }
 
     };
